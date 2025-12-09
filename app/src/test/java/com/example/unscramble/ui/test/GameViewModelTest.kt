@@ -19,7 +19,7 @@ package com.example.unscramble.ui.test
 import com.example.unscramble.data.MAX_NO_OF_WORDS
 import com.example.unscramble.data.SCORE_INCREASE
 import com.example.unscramble.data.getUnscrambledWord
-import com.example.unscramble.ui.GameViewModel
+import com.example.unscramble.ui.GameViewModel // ViewModel: contiene lógica de negocio y estado que se está probando
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -27,6 +27,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GameViewModelTest {
+    // Crea instancia del ViewModel para cada test
     private val viewModel = GameViewModel()
 
     @Test
@@ -38,6 +39,7 @@ class GameViewModelTest {
          *  unit tests using different methods/approaches. This applies to all the usages of
          *  viewModel.uiState.value in this class.
          **/
+        // Accede al estado de UI actual desde el StateFlow del ViewModel
         val gameUiState = viewModel.uiState.value
         val unScrambledWord = getUnscrambledWord(gameUiState.currentScrambledWord)
 
@@ -58,9 +60,11 @@ class GameViewModelTest {
         // Given an incorrect word as input
         val incorrectPlayerWord = "and"
 
+        // Evento: actualiza el guess del usuario y verifica la respuesta
         viewModel.updateUserGuess(incorrectPlayerWord)
         viewModel.checkUserGuess()
 
+        // Verifica que el estado de UI se actualizó correctamente
         val currentGameUiState = viewModel.uiState.value
         // Assert that score is unchanged
         assertEquals(0, currentGameUiState.score)
@@ -73,9 +77,10 @@ class GameViewModelTest {
         var currentGameUiState = viewModel.uiState.value
         val correctPlayerWord = getUnscrambledWord(currentGameUiState.currentScrambledWord)
 
+        // Evento: actualiza el guess y verifica respuesta correcta
         viewModel.updateUserGuess(correctPlayerWord)
         viewModel.checkUserGuess()
-        currentGameUiState = viewModel.uiState.value
+        currentGameUiState = viewModel.uiState.value // Obtiene estado actualizado del StateFlow
 
         // Assert that checkUserGuess() method updates isGuessedWordWrong is updated correctly.
         assertFalse(currentGameUiState.isGuessedWordWrong)
@@ -93,8 +98,9 @@ class GameViewModelTest {
         currentGameUiState = viewModel.uiState.value
         val lastWordCount = currentGameUiState.currentWordCount
 
+        // Evento: salta palabra actual
         viewModel.skipWord()
-        currentGameUiState = viewModel.uiState.value
+        currentGameUiState = viewModel.uiState.value // Obtiene nuevo estado del StateFlow
         // Assert that score remains unchanged after word is skipped.
         assertEquals(SCORE_AFTER_FIRST_CORRECT_ANSWER, currentGameUiState.score)
         // Assert that word count is increased by 1 after word is skipped.
@@ -107,11 +113,12 @@ class GameViewModelTest {
         var currentGameUiState = viewModel.uiState.value
         var correctPlayerWord = getUnscrambledWord(currentGameUiState.currentScrambledWord)
 
+        // Simula juego completo: responde todas las palabras correctamente
         repeat(MAX_NO_OF_WORDS) {
             expectedScore += SCORE_INCREASE
             viewModel.updateUserGuess(correctPlayerWord)
             viewModel.checkUserGuess()
-            currentGameUiState = viewModel.uiState.value
+            currentGameUiState = viewModel.uiState.value // StateFlow emite nuevo estado
             correctPlayerWord = getUnscrambledWord(currentGameUiState.currentScrambledWord)
             // Assert that after each correct answer, score is updated correctly.
             assertEquals(expectedScore, currentGameUiState.score)
@@ -119,7 +126,7 @@ class GameViewModelTest {
         // Assert that after all questions are answered, the current word count is up-to-date.
         assertEquals(MAX_NO_OF_WORDS, currentGameUiState.currentWordCount)
         // Assert that after 10 questions are answered, the game is over.
-        assertTrue(currentGameUiState.isGameOver)
+        assertTrue(currentGameUiState.isGameOver) // Verifica que el estado marca fin del juego
     }
 
     companion object {

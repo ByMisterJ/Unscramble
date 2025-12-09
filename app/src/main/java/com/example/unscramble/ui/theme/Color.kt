@@ -18,6 +18,9 @@ package com.example.unscramble.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Material Design 3: definiciones de colores para tema claro y oscuro
+// Estos colores forman la paleta que se usa en lightColorScheme y darkColorScheme
+// Nombres siguiendo convención Material: md_theme_[light|dark]_[role]
 val md_theme_light_primary = Color(0xFF4355B9)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFDEE0FF)

@@ -16,13 +16,14 @@
 
 package com.example.unscramble.ui.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.material3.Typography // Material 3: define estilos tipográficos consistentes en toda la app
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
+// Typography: conjunto de estilos de texto Material Design para mantener consistencia visual
+// Define jerarquía tipográfica (headlineMedium, bodyLarge, etc.) usada por componentes Material
 val Typography = Typography(
     headlineMedium = TextStyle(
         fontFamily = FontFamily.Default,
@@ -31,4 +32,5 @@ val Typography = Typography(
         lineHeight = 36.sp,
         letterSpacing = 0.5.sp
     )
+    // Se puede extender con más estilos: bodyLarge, titleSmall, labelMedium, etc.
 )
