@@ -16,10 +16,12 @@
 
 package com.example.unscramble.data
 
-const val MAX_NO_OF_WORDS = 10
-const val SCORE_INCREASE = 20
+// Constantes de la capa de datos que definen reglas del juego
+const val MAX_NO_OF_WORDS = 10 // Número máximo de palabras por partida
+const val SCORE_INCREASE = 20 // Puntos otorgados por respuesta correcta
 
-// Set with all the words for the Game
+// Capa de datos: conjunto inmutable de palabras usado como fuente de datos para el juego
+// Set: colección que no permite duplicados, ideal para este caso
 val allWords: Set<String> =
     setOf(
         "animal",

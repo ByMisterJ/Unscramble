@@ -18,14 +18,15 @@ package com.example.unscramble.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.MaterialTheme // Material 3: tema central que define colores, tipografía y formas de la app
+import androidx.compose.material3.darkColorScheme // Material 3: esquema de colores para modo oscuro
+import androidx.compose.material3.dynamicDarkColorScheme // Material 3: colores dinámicos del sistema (Android 12+)
+import androidx.compose.material3.dynamicLightColorScheme // Material 3: colores dinámicos del sistema para modo claro
+import androidx.compose.material3.lightColorScheme // Material 3: esquema de colores para modo claro
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+// lightColorScheme: define la paleta de colores Material para tema claro
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -58,6 +59,7 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
+// darkColorScheme: define la paleta de colores Material para tema oscuro
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -90,14 +92,16 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+// @Composable: función componible que aplica el tema Material a toda la app
 @Composable
 fun UnscrambleTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = isSystemInDarkTheme(), // Detecta preferencia de tema del sistema
     // Dynamic color is available on Android 12+
     // Dynamic color in this app is turned off for learning purposes
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit // Contenido de la app que heredará el tema
 ) {
+    // Selecciona el esquema de colores según configuración y versión de Android
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
@@ -108,10 +112,12 @@ fun UnscrambleTheme(
         else -> LightColors
     }
 
+    // MaterialTheme: aplica el tema Material Design con colores, tipografía y formas personalizadas
+    // Todos los componentes Material dentro heredan estos estilos automáticamente
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content,
-        shapes = Shapes
+        colorScheme = colorScheme, // Paleta de colores Material
+        typography = Typography, // Estilos tipográficos definidos
+        content = content, // Contenido de la app
+        shapes = Shapes // Formas (bordes redondeados) definidas
     )
 }

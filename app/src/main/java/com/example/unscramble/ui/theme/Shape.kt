@@ -17,11 +17,13 @@
 package com.example.unscramble.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Shapes
+import androidx.compose.material3.Shapes // Material 3: define formas (bordes redondeados) para componentes
 import androidx.compose.ui.unit.dp
 
+// Shapes: conjunto de formas Material Design que definen bordes redondeados de componentes
+// Usado por Card, Button, TextField, etc. para mantener consistencia visual
 val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(10.dp),
-    large = RoundedCornerShape(16.dp)
+    small = RoundedCornerShape(4.dp), // Bordes ligeramente redondeados para elementos pequeños
+    medium = RoundedCornerShape(10.dp), // Bordes medianos para Cards y Buttons
+    large = RoundedCornerShape(16.dp) // Bordes muy redondeados para diálogos y surfaces grandes
 )
